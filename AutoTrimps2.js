@@ -1587,7 +1587,7 @@ function autoMap() {
             } else if (!game.global.mapsActive) {
                 if (shouldDoMap != "world") {
                     //if shouldFarm, don't switch until after megafarming
-                    if (!game.global.switchToMaps && ((shouldFarm && game.global.lastClearedCell > 79) || !shouldFarm)) {
+                    if (!game.global.switchToMaps && ((shouldFarm && game.global.lastClearedCell > 94) || !shouldFarm)) {
                          mapsClicked();
                     }
                     //if (prestige mapping or need to do void maps or on lead in odd world) abandon army if (a new army is ready or need to void map and we're almost done with the zone)
