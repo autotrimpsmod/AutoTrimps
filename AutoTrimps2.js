@@ -1578,6 +1578,10 @@ function autoMap() {
                     if (stackingTox && (game.challenges.Toxicity.stacks + game.global.mapGridArray.length - (game.global.lastClearedMapCell + 1) >= 1500)){
                         repeatClicked();
                     }
+                    //if balance is active to try keep that value up.
+                    if (game.challenges.Balance.balanceStacks > 1) {
+                        repeatClicked();
+                    }
                 } else {
                     //otherwise, make sure repeat map is off
                     if (game.global.repeatMap) {
@@ -1593,6 +1597,13 @@ function autoMap() {
                     //if (prestige mapping or need to do void maps or on lead in odd world) abandon army if (a new army is ready or need to void map and we're almost done with the zone)
                     if(game.global.switchToMaps && ((game.global.challengeActive == 'Lead' && game.global.world % 2 == 1) || doVoids || needPrestige) && ((shouldFarm && game.global.challengeActive == 'Lead') || game.resources.trimps.realMax() <= game.resources.trimps.owned + 1 || (doVoids && game.global.lastClearedCell > 95)))
                              mapsClicked();
+                    //if balance is maxed and we can get equipment upgrades force maps
+                    if(addSpecials(true,true,true,true).length>0 && game.challenges.Balance.balanceStacks == 250) {
+                        if (!game.global.switchToMaps) {
+                            mapsClicked();
+                        }
+                        mapsClicked();
+                    }
                 }
             }
         } else if (game.global.preMapsActive) {
