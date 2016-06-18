@@ -1650,7 +1650,7 @@ function autoMap() {
                     biomeAdvMapsSelect.value = "Random";
                     updateMapCost();
                     
-                    while (lootAdvMapsRange.value > 0 && updateMapCost(true) > game.resources.fragments.owned && updateMapCost(true) > getPerSecBeforeManual('Dragimp')*10 ) {
+                    while (lootAdvMapsRange.value > 0 && updateMapCost(true) > game.resources.fragments.owned && updateMapCost(true) > ((allSaveData[allSaveData.length-2].currentTime - allSaveData[allSaveData.length-3].currentTime)/1000)*getPerSecBeforeManual('Explorer')/10 ) {
                         lootAdvMapsRange.value -= 1;
                     }
                 }
