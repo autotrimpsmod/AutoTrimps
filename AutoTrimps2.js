@@ -1644,11 +1644,15 @@ function autoMap() {
                     adjustMap('size', 9);
                     difficultyAdvMapsRange.value = 9;
                     adjustMap('difficulty', 9);
-                    lootAdvMapsRange.value = 0;
-                    adjustMap('loot', 0);
+                    lootAdvMapsRange.value = 9;
+                    adjustMap('loot', 9);
 
                     biomeAdvMapsSelect.value = "Random";
                     updateMapCost();
+                    
+                    while (lootAdvMapsRange.value > 0 && updateMapCost(true) > game.resources.fragments.owned && updateMapCost(true) > getPerSecBeforeManual('Dragimp')*10 ) {
+                        lootAdvMapsRange.value -= 1;
+                    }
                 }
                 //if we are farming (for resources), make sure it's metal, and put low priority on size
                 if(shouldFarm) {
