@@ -21,6 +21,8 @@ var breedFire = false;
 var shouldFarm = false;
 var enoughDamage = true;
 var enoughHealth = true;
+var lastDeadTrimps = 0;
+var diedHereBefore = false;
 
 var baseDamage = 0;
 var baseBlock = 0;
@@ -1404,7 +1406,17 @@ function autoMap() {
         }
         if(game.global.totalVoidMaps == 0 || !needToVoid)
             doVoids = false;
-
+        
+        //Check if we have died at this cell before
+        if(lastDeadTrimps != game.stats.trimpsKilled.value) {
+            if(game.global.mapsActive) diedHereBefore = false;
+            else if(lastClearedCell != game.global.lastClearedCell){
+                diedHereBefore = false;
+                lastClearedCell = game.global.lastClearedCell;
+            }
+            else diedHereBefore = true;
+            lastDeadTrimps = game.stats.trimpsKilled.value;
+        }
         enoughHealth = (baseHealth * 4 > 30 * (enemyDamage - baseBlock / 2 > 0 ? enemyDamage - baseBlock / 2 : enemyDamage * 0.2) || baseHealth > 30 * (enemyDamage - baseBlock > 0 ? enemyDamage - baseBlock : enemyDamage * 0.2));
         enoughDamage = (baseDamage * 4 > enemyHealth);
         var shouldDoMaps = !enoughHealth || !enoughDamage;
@@ -1412,6 +1424,9 @@ function autoMap() {
 
         //if we are at max map bonus, and we don't need to farm, don't do maps
         if(game.global.mapBonus == 10 && !shouldFarm) shouldDoMaps = false;
+        //we have stacks and there is no upgrades to get 
+        if(game.challenges.Balance.balanceStacks > 0 && !diedHereBefore && addSpecials(true,true,true,true).length == 0) shouldDoMaps = false;
+        
         //if we are prestige mapping, force equip first mode
         if(autoTrimpSettings.Prestige.selected != "Off" && game.options.menu.mapLoot.enabled != 1) toggleSetting('mapLoot');
         //if player has selected arbalest or gambeson but doesn't have them unlocked, just unselect it for them! It's magic!
