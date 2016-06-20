@@ -1688,6 +1688,7 @@ function autoMap() {
                     selectMap(game.global.mapsOwnedArray[highestMap].id);
                     runMap();
                 } else {
+                    debug('Buy map size:' + sizeAdvMapsRange.value + ' difficulty:' + difficultyAdvMapsRange.value + ' loot:' + lootAdvMapsRange.value); 
                     if(buyMap() == -2){
                         recycleBelow(true);
                          buyMap();
@@ -1974,7 +1975,7 @@ function mainLoop() {
         lowLevelFight = game.resources.trimps.maxSoldiers < (game.resources.trimps.owned - game.resources.trimps.employed) * 0.5 && (game.resources.trimps.owned - game.resources.trimps.employed) > game.resources.trimps.realMax() * 0.1 && game.global.world < 5 && game.global.sLevel > 0;
         if (game.upgrades.Battle.done && !game.global.fighting && game.global.gridArray.length !== 0 && !game.global.preMapsActive && (game.resources.trimps.realMax() <= game.resources.trimps.owned + 1 || game.global.soldierHealth > 0 || lowLevelFight )) {
             fightManual();
-            debug('triggered fight');
+            //debug('triggered fight');
         }
     }
 }
