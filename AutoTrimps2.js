@@ -22,7 +22,7 @@ var shouldFarm = false;
 var enoughDamage = true;
 var enoughHealth = true;
 var lastDeadTrimps = 0;
-var lastCellCleared = 0;
+var lastClearedCell = 0;
 var diedHereBefore = false;
 
 var baseDamage = 0;
